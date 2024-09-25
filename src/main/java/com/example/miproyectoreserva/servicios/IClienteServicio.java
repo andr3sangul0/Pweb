@@ -9,5 +9,6 @@ public interface IClienteServicio {
     List<Cliente> obtenerTodosLosClientes();
     Cliente guardarCliente(Cliente cliente);
     void eliminarCliente(Long id);
+    Optional<Cliente> obtenerClientePorId(Long id);
     Optional<Cliente> actualizarCliente(Long id, Cliente cliente);
 }

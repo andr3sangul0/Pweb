@@ -33,6 +33,11 @@ public class AerolineaServicio implements IAerolineaServicio {
     }
 
     @Override
+    public Optional<Aerolinea> obtenerAerolineaPorId(Long id) {
+        return aerolineaRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Aerolinea> actualizarAerolinea(Long id, Aerolinea aerolinea) {
         return aerolineaRepositorio.findById(id).map(oldAerolinea -> {
             oldAerolinea.setCodigoAerolinea(aerolinea.getCodigoAerolinea());

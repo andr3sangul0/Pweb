@@ -33,6 +33,11 @@ public class ReservaServicio implements IReservaServicio{
     }
 
     @Override
+    public Optional<Reserva> buscarReservaPorId(Long id) {
+        return reservaRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Reserva> actualizarReserva(Long id, Reserva reserva) {
         return reservaRepositorio.findById(id).map(oldReserva -> {
             oldReserva.setFechaReserva(reserva.getFechaReserva());

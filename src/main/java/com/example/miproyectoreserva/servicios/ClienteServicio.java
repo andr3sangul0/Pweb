@@ -33,6 +33,11 @@ public class ClienteServicio implements IClienteServicio{
     }
 
     @Override
+    public Optional<Cliente> obtenerClientePorId(Long id) {
+        return clienteRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Cliente> actualizarCliente(Long id, Cliente cliente) {
         return clienteRepositorio.findById(id).map(oldCliente -> {
             oldCliente.setNombre(cliente.getNombre());

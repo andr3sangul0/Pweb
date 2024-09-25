@@ -33,6 +33,11 @@ public class PasajeroServicio implements IPasajeroServicio{
     }
 
     @Override
+    public Optional<Pasajero> obtenerPasajeroPorId(Long id) {
+        return pasajeroRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Pasajero> actualizarPasajero(Long id, Pasajero pasajero) {
         return pasajeroRepositorio.findById(id).map(oldPasajero -> {
             oldPasajero.setNombre(pasajero.getNombre());

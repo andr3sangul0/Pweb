@@ -33,6 +33,11 @@ public class AeropuertoServicio implements IAeropuertoServicio{
     }
 
     @Override
+    public Optional<Aeropuerto> obtenerAeropuertoPorId(Long id) {
+        return aeropuertoRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Aeropuerto> actualizarAeropuerto(Long id, Aeropuerto aeropuerto) {
         return aeropuertoRepositorio.findById(id).map(oldAeropuerto -> {
             oldAeropuerto.setNombre(aeropuerto.getNombre());

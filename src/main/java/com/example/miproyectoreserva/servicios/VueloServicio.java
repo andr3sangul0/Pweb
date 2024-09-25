@@ -33,6 +33,11 @@ public class VueloServicio implements IVueloServicio {
     }
 
     @Override
+    public Optional<Vuelo> obtenerVueloPorId(Long id) {
+        return vueloRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Vuelo> actualizarVuelo(Long id, Vuelo vuelo) {
         return vueloRepositorio.findById(id).map(oldVuelo -> {
             oldVuelo.setCapacidad(vuelo.getCapacidad());
