@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/aeropuertos")
+@RequestMapping("/api/v1/aeropuertos")
 public class AeropuertoControlador {
 
     private final AeropuertoServicio aeropuertoServicio;
@@ -26,7 +26,7 @@ public class AeropuertoControlador {
         return ResponseEntity.ok(aeropuertoServicio.obtenerTodosLosAeropuertos());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Aeropuerto> obtenerAeropuertoPorId(@PathVariable Long id) {
         return aeropuertoServicio.obtenerAeropuertoPorId(id)
                 .map(aeropuerto -> ResponseEntity.ok().body(aeropuerto))
@@ -47,7 +47,7 @@ public class AeropuertoControlador {
         return ResponseEntity.created(location).body(aeropuertoNuevo);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<Aeropuerto> actualizarAeropuerto(@PathVariable Long id, @RequestBody Aeropuerto aeropuertoNuevo) {
         Optional<Aeropuerto> aeropuertoActualizado = aeropuertoServicio.actualizarAeropuerto(id, aeropuertoNuevo);
         return aeropuertoActualizado.map(aeropuerto -> ResponseEntity.ok(aeropuerto)).orElseGet(() -> {
@@ -55,7 +55,7 @@ public class AeropuertoControlador {
         });
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Aeropuerto> eliminarAeropuerto(@PathVariable Long id) {
         aeropuertoServicio.eliminarAeropuerto(id);
         return ResponseEntity.noContent().build();

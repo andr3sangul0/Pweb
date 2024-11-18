@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/reservas")
+@RequestMapping("/api/v1/reservas")
 public class ReservaControlador {
 
     private final ReservaServicio reservaServicio;
@@ -25,7 +25,7 @@ public class ReservaControlador {
         return ResponseEntity.ok(reservaServicio.obtenerTodasLasReservas());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Reserva> obtenerReservaPorId(@PathVariable Long id) {
         return reservaServicio.buscarReservaPorId(id)
                 .map(reserva -> ResponseEntity.ok().body(reserva))
@@ -46,7 +46,7 @@ public class ReservaControlador {
         return ResponseEntity.created(location).body(reservaNueva);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<Reserva> actualizarReserva(@PathVariable Long id, @RequestBody Reserva reservaNueva) {
         Optional<Reserva> reservaActualizada = reservaServicio.actualizarReserva(id, reservaNueva);
         return reservaActualizada.map(reserva -> ResponseEntity.ok(reserva)).orElseGet(() -> {
@@ -54,7 +54,7 @@ public class ReservaControlador {
         });
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Reserva> eliminarReserva(@PathVariable Long id) {
         reservaServicio.eliminarReserva(id);
         return ResponseEntity.noContent().build();

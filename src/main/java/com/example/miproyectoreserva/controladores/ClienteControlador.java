@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/api/v1/clientes")
 public class ClienteControlador {
 
     private final ClienteServicio clienteServicio;
@@ -26,7 +26,7 @@ public class ClienteControlador {
         return ResponseEntity.ok(clienteServicio.obtenerTodosLosClientes());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Cliente> obtenerClientePorId(@PathVariable Long id) {
         return clienteServicio.obtenerClientePorId(id)
                 .map(cliente -> ResponseEntity.ok().body(cliente))
@@ -47,7 +47,7 @@ public class ClienteControlador {
         return ResponseEntity.created(location).body(clienteNuevo);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteNuevo) {
         Optional<Cliente> clienteActualizado = clienteServicio.actualizarCliente(id, clienteNuevo);
         return clienteActualizado.map(cliente -> ResponseEntity.ok(cliente))
@@ -56,7 +56,7 @@ public class ClienteControlador {
                 });
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
         clienteServicio.eliminarCliente(id);
         return ResponseEntity.noContent().build();
